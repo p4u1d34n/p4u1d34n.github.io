@@ -13,9 +13,9 @@ const staticAssets = [
 ];
 
 const failoverResources = [
-    {'.png':'https://dummyimage.com/300/09f/fff.png&text=Placeholder'},
-    {'.jpg':'https://dummyimage.com/300/09f/fff.jpg&text=Placeholder'},
-    {'.html':'faiover.html'}
+    ['.png','https://dummyimage.com/300/09f/fff.png&text=Placeholder'],
+    ['.jpg','https://dummyimage.com/300/09f/fff.jpg&text=Placeholder'],
+    ['.html','faiover.html']
 ]
 
 self.addEventListener('install', (e)=>{
