@@ -68,7 +68,7 @@ self.addEventListener('activate', e => {
 })
 
 self.addEventListener('fetch', (e) => {
-    console.log("SW fetching...")
+    console.log("SW fetching...",e.request)
 
     clearCaches(e);
 
