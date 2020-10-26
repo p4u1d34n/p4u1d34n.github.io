@@ -20,6 +20,8 @@ canvasContext.fillStyle = 'firebrick';
 const drawWave = () => { // this gets called via requestAnimationFrame, so runs roughly every 16ms
   analyser.getByteTimeDomainData(dataArray);
 
+  console.log('dataArray',dataArray);
+
   let lastPos = 0;
   dataArray.forEach((item, i) => {
     if (item > 128 && lastItem <= 128) { // we have crossed below the mid point
@@ -49,5 +51,5 @@ const renderAudio = () => {
 renderAudio(); // kick the whole thing off
 
 setInterval(() => {
-  console.log(pitchSamples); // defined elsewhere, will get the average pitch and render a key
+  console.log('pitchSamples',pitchSamples); // defined elsewhere, will get the average pitch and render a key
 }, 250);
