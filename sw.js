@@ -26,6 +26,7 @@ self.addEventListener('install', (e)=>{
             failoverResources.forEach((key) => {
                 staticAssets.push(key[1]);
             });
+            console.log('staticAssets',staticAssets)
             static.addAll(staticAssets);
         }).then(()=>{
             self.skipWaiting();
