@@ -43,7 +43,7 @@ self.addEventListener('activate', e =>{
                 cacheNameKeys.map(cacheName => {
                     console.log("SW cacheName", cacheName)
                     console.log("SW includes?", cacheNames.indexOf(cacheName))
-                    if(cacheNames.indexOf(cacheName) == -1 ) {
+                    if(cacheNames.indexOf(cacheName) === -1 ) {
                         caches.delete(cacheName).then( v => {
                             console.error("Value", v)
                             return true;
@@ -61,6 +61,24 @@ self.addEventListener('activate', e =>{
 
 self.addEventListener('fetch', (e)=>{
     console.log("SW fetching...")
+
+    e.respondWith(
+        fetch(e.request)
+        .then(e => {
+
+        })
+        .catch(e => {
+            failoverResources.forEach(failover => {
+                if( e.request.indexOf(failover[0]) === -1 ) {
+                    caches.match(e.request)
+                } else {
+                    caches.match(failover[1])
+                }
+            })
+            
+            
+        })
+    )
 
     failoverResources.forEach((key) => {
         console.log(key[0]);
