@@ -28,7 +28,7 @@ const drawWave = () => {
   let lastPos = 0;
   dataArray.forEach((item, i) => {
 
-    let hertz;
+    let hertz = 0;
     if (item > 128 && lastItem <= 128) { // we have crossed below the mid point
       const elapsedSteps = i - lastPos; // how far since the last time we did this
       lastPos = i;
