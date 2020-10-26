@@ -29,13 +29,10 @@ self.addEventListener('install', (e) => {
 
 self.addEventListener('activate', e => {
     e.waitUntil(
-        caches.keys().then(cacheNameKeys => {
+        caches.keys().then(keys => {
             return Promise.all(
-                cacheNameKeys.map(cacheName => {
-                    if (cacheNames.indexOf(cacheName) == -1) {
-                        return caches.delete(cacheName);
-                    }
-                })
+                keys.filter(key => !cacheNames.includes(key) )
+                .map(key => caches.delete(key))
             )
         })
     )
@@ -43,21 +40,6 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', (e) => {
     console.log("SW fetching...", e.request.url )
-
-    e.waitUntil(
-        caches.keys().then(cacheNameKeys => {
-            console.log("SW cacheNameKeys", cacheNameKeys)
-            return Promise.all(
-                cacheNameKeys.map(cacheName => {
-                    console.log("SW cacheName", cacheName)
-                    console.log("SW includes?", cacheNames.indexOf(cacheName))
-                    if (cacheNames.indexOf(cacheName) === -1) {
-                        return caches.delete(cacheName);
-                    }
-                })
-            )
-        })
-    )
 
     e.respondWith(
         fetch(e.request)
@@ -68,7 +50,15 @@ self.addEventListener('fetch', (e) => {
                 });
                 return res;
             })
-            .catch((err) => caches.match(e.request).then(res => res))
+            .catch((err) => {
+                
+                caches.match(e.request).then(res => {
+                    res
+                }).catch( err => {
+                    caches.match('failover.html');
+                })
+
+            })
 
 
     )
