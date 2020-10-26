@@ -55,6 +55,19 @@ self.addEventListener('activate', e =>{
 self.addEventListener('fetch', (e)=>{
     console.log("SW fetching...")
 
+    caches.keys().then( cacheNameKeys =>{
+        console.log("SW cacheNameKeys", cacheNameKeys)
+        return Promise.all(
+            cacheNameKeys.map(cacheName => {
+                console.log("SW cacheName", cacheName)
+                console.log("SW includes?", cacheNames.indexOf(cacheName))
+                if(cacheNames.indexOf(cacheName) === -1 ) {
+                    return caches.delete(cacheName);
+                }
+            })
+        )
+    })
+
     e.respondWith(
         fetch(e.request)
         .catch(() => {
