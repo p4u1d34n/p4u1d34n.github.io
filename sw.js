@@ -76,7 +76,6 @@ self.addEventListener('fetch', (e)=>{
                 }
             })
             
-            
         })
     )
 
