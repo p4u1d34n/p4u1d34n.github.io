@@ -1,0 +1,6 @@
+{
+    "liveServer.settings.CustomBrowser": "firefox",
+    "liveServer.settings.https": {
+        "enable": true
+    }
+}
