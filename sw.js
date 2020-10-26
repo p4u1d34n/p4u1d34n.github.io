@@ -21,15 +21,12 @@ const failoverResources = [
 self.addEventListener('install', (e)=>{
     console.log("SW installed")
 
-    
-
     e.waitUntil(
         caches.open(staticCacheName).then(static =>{
-            static.addAll(staticAssets);
             failoverResources.forEach((key) => {
-                console.log(key[0]);
-                console.log(key[1]);
-            })
+                staticAssets.push(key[1]);
+            });
+            static.addAll(staticAssets);
         }).then(()=>{
             self.skipWaiting();
         })
