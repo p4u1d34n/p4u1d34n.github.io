@@ -30,6 +30,7 @@ const drawWave = () => { // this gets called via requestAnimationFrame, so runs 
 
       const hertz = 1 / (elapsedSteps / 44100);
       pitchSamples.push(hertz); // an array of every pitch encountered
+      console.log('hertz',hertz);
     }
 
     canvasContext.fillRect(i, item, 1, 1); // point in the wave
@@ -51,5 +52,5 @@ const renderAudio = () => {
 renderAudio(); // kick the whole thing off
 
 setInterval(() => {
-  console.log('pitchSamples',pitchSamples); // defined elsewhere, will get the average pitch and render a key
+   // defined elsewhere, will get the average pitch and render a key
 }, 250);
