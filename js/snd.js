@@ -14,11 +14,11 @@ navigator.mediaDevices.getUserMedia(
 
 const dataArray = new Uint8Array(analyser.frequencyBinCount);
 var canvas = document.getElementById('canvas');
-const canvasContext = canvas.getContext('2d');
-canvasContext.fillStyle = 'firebrick';
+const canvasCtx = canvas.getContext('2d');
+canvasCtx.fillStyle = 'firebrick';
 
 const drawWave = () => { // this gets called via requestAnimationFrame, so runs roughly every 16ms
-  analyser.getByteTimeDomainData(dataArray);
+  /* analyser.getByteTimeDomainData(dataArray);
 
   let lastPos = 0;
   dataArray.forEach((item, i) => {
@@ -33,7 +33,35 @@ const drawWave = () => { // this gets called via requestAnimationFrame, so runs 
     canvasContext.fillRect(i, item, 1, 1); // point in the wave
 
     lastItem = item;
-  });
+  }); */
+
+  analyser.getByteTimeDomainData(dataArray);
+
+  canvasCtx.fillStyle = 'rgb(200, 200, 200)';
+  canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+
+  canvasCtx.lineWidth = 2;
+  canvasCtx.strokeStyle = 'rgb(0, 0, 0)';
+
+  const sliceWidth = WIDTH * 1.0 / bufferLength;
+  let x = 0;
+
+  canvasCtx.beginPath();
+  for(var i = 0; i < bufferLength; i++) {
+    const v = dataArray[i]/128.0;
+    const y = v * HEIGHT/2;
+
+    if(i === 0)
+      canvasCtx.moveTo(x, y);
+    else
+      canvasCtx.lineTo(x, y);
+
+    x += sliceWidth;
+  }
+
+  canvasCtx.lineTo(WIDTH, HEIGHT/2);
+  canvasCtx.stroke();
+
 };
 
 const renderAudio = () => {
