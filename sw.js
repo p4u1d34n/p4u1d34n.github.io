@@ -26,12 +26,15 @@ self.addEventListener('install', (e) => {
 	)
 })
 
-self.addEventListener('activate', e => {
+self.addEventListener('activate', e => {s
 	e.waitUntil(
 		caches.keys().then(keys => {
 			return Promise.all(
-				keys.filter(key => !cacheNames.includes(key))
-					.map(key => caches.delete(key))
+				keys.forEach(key => {
+					if(cacheNames.indexOf(key) == -1) {
+						caches.delete(key)
+					}
+				})
 			)
 		})
 	)
