@@ -48,7 +48,7 @@ self.addEventListener('fetch', (e) => {
 			.then(res => {
 				const resClone = res.clone();
 				caches.open(dynamicCacheName).then(cache => {
-					cache.put(e.request, resClone);
+					cache.put(e.request.url, resClone);
 				});
 				return res;
 			})
