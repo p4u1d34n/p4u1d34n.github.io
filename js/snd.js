@@ -69,7 +69,7 @@ const renderAudio = () => {
 
   if (!audioReady) return;
 
-  canvasContext.clearRect(0, 0, 1024, 300);
+  canvasCtx.clearRect(0, 0, 1024, 300);
 
   drawWave();
 };
