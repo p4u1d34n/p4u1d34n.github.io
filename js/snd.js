@@ -58,7 +58,7 @@ const drawWave = () => {
   });
 
   canvasCtx.fillStyle = 'rgb(200, 200, 200)';
-  canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+  canvasCtx.fillRect(0, 0, 300, 300);
 
   canvasCtx.lineWidth = 2;
   canvasCtx.strokeStyle = 'rgb(0, 0, 0)';
@@ -69,7 +69,7 @@ const drawWave = () => {
   canvasCtx.beginPath();
   for(var i = 0; i < bufferLength; i++) {
     const v = dataArray[i]/128.0;
-    const y = v * HEIGHT/2;
+    const y = v * 300/2;
 
     if(i === 0)
       canvasCtx.moveTo(x, y);
@@ -82,7 +82,7 @@ const drawWave = () => {
   canvasCtx.lineTo(200, 200/2);
   canvasCtx.stroke();
 
-  console.log("---")
+ 
 
 };
 
