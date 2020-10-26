@@ -13,8 +13,8 @@ navigator.mediaDevices.getUserMedia(
 );
 
 const dataArray = new Uint8Array(analyser.frequencyBinCount);
-
-const canvasContext = refs.canvas.getContext('2d');
+var canvas = document.getElementById('canvas');
+const canvasContext = canvas.getContext('2d');
 canvasContext.fillStyle = 'firebrick';
 
 const drawWave = () => { // this gets called via requestAnimationFrame, so runs roughly every 16ms
