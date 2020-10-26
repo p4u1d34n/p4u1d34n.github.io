@@ -39,12 +39,9 @@ self.addEventListener('install', (e) => {
 self.addEventListener('activate', e => {
     e.waitUntil(
         caches.keys().then(cacheNameKeys => {
-            console.log("SW cacheNameKeys", cacheNameKeys)
             return Promise.all(
                 cacheNameKeys.map(cacheName => {
-                    console.log("SW cacheName", cacheName)
-                    console.log("SW includes?", cacheNames.indexOf(cacheName))
-                    if (cacheNames.indexOf(cacheName) === -1) {
+                    if (cacheNames.indexOf(cacheName) == -1) {
                         return caches.delete(cacheName);
                     }
                 })
