@@ -7,7 +7,17 @@ const cacheNames = [
 ];
 
 const staticAssets = [
-    
+    'index.html',
+    '/css/styles.css',
+    '/js/main.js'
+];
+
+const failoverResources = [
+    {
+        '.png':'https://dummyimage.com/300/09f/fff.png&text=Placeholder',
+        '.jpg':'https://dummyimage.com/300/09f/fff.jpg&text=Placeholder',
+        '.html':'faiover.html'
+    }
 ]
 
 self.addEventListener('install', (e)=>{
