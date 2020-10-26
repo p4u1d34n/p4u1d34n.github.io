@@ -42,10 +42,10 @@ self.addEventListener('activate', (e)=>{
             return Promise.all(
                 cacheNameKeys.map(cacheName => {
                     console.log("SW cacheName", cacheName)
-                    console.log("SW includes?", cacheNames.includes(cacheName))
+                    /* console.log("SW includes?", cacheNames.includes(cacheName))
                     if(!cacheNames.includes(cacheName)) {
                         return caches.delete(cacheName)
-                    }
+                    } */
                 })
             )
         })
