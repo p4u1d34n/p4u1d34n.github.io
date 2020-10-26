@@ -38,8 +38,11 @@ self.addEventListener('activate', (e)=>{
     console.log("SW activated")
     e.waitUntil(
         caches.keys().then( cacheNameKeys =>{
+            console.log("SW cacheNameKeys", cacheNameKeys)
             return Promise.all(
                 cacheNameKeys.map(cacheName => {
+                    console.log("SW cacheName", cacheName)
+                    console.log("SW includes?", cacheNames.includes(cacheName))
                     if(!cacheNames.includes(cacheName)) {
                         return caches.delete(cacheName)
                     }
