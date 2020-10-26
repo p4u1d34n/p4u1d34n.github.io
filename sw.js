@@ -13,11 +13,9 @@ const staticAssets = [
 ];
 
 const failoverResources = [
-    {
-        '.png':'https://dummyimage.com/300/09f/fff.png&text=Placeholder',
-        '.jpg':'https://dummyimage.com/300/09f/fff.jpg&text=Placeholder',
-        '.html':'faiover.html'
-    }
+    {'.png':'https://dummyimage.com/300/09f/fff.png&text=Placeholder'},
+    {'.jpg':'https://dummyimage.com/300/09f/fff.jpg&text=Placeholder'},
+    {'.html':'faiover.html'}
 ]
 
 self.addEventListener('install', (e)=>{
@@ -25,7 +23,11 @@ self.addEventListener('install', (e)=>{
 
     e.waitUntil(
         caches.open(staticCacheName).then(static =>{
-            static.addAll(staticAssets)
+            static.addAll(staticAssets);
+            failoverResources.forEach((key) => {
+                console.log(key[0]);
+                console.log(key[1]);
+            })
         })
     )
 })
