@@ -41,11 +41,11 @@ self.addEventListener('activate', (e)=>{
 })
 
 self.addEventListener('fetch', (e)=>{
-    console.log("SW fetch")
+    console.log("SW fetching...")
 
     failoverResources.forEach((key) => {
         console.log(key[0]);
         console.log(key[1]);
     });
-    
+
 })
