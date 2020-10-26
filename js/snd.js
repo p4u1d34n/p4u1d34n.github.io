@@ -35,7 +35,7 @@ const drawWave = () => {
       pitchSamples.push(hertz); // an array of every pitch encountered
     }
 
-    canvasCtx.fillRect(i, item, 1, 1); // point in the wave
+    canvasCtx.fillRect(i, item, 1, hertz); // point in the wave
 
     lastItem = item;
   });
