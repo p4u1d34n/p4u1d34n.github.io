@@ -1,3 +1,4 @@
+// SW INIT BEGIN
 if('serviceWorker' in navigator) {
     console.log("SW supported");
     window.addEventListener('load',()=>{
@@ -8,3 +9,4 @@ if('serviceWorker' in navigator) {
         })
     })
 }
+// SW INIT END
