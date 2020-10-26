@@ -3,7 +3,7 @@ const analyser = audioContext.createAnalyser();
 const pitchSamples = [];
 let audioReady = false;
 
-navigator.getUserMedia(
+navigator.mediaDevices.getUserMedia(
   {audio: true},
   stream => {
     audioContext.createMediaStreamSource(stream).connect(analyser);
