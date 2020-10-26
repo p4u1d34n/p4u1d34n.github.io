@@ -20,8 +20,6 @@ canvasContext.fillStyle = 'firebrick';
 const drawWave = () => { // this gets called via requestAnimationFrame, so runs roughly every 16ms
   analyser.getByteTimeDomainData(dataArray);
 
-  console.log('dataArray',dataArray);
-
   let lastPos = 0;
   dataArray.forEach((item, i) => {
     if (item > 128 && lastItem <= 128) { // we have crossed below the mid point
@@ -30,7 +28,6 @@ const drawWave = () => { // this gets called via requestAnimationFrame, so runs 
 
       const hertz = 1 / (elapsedSteps / 44100);
       pitchSamples.push(hertz); // an array of every pitch encountered
-      console.log('hertz',hertz);
     }
 
     canvasContext.fillRect(i, item, 1, 1); // point in the wave
