@@ -44,7 +44,7 @@ const drawWave = () => {
   canvasCtx.lineWidth = 2;
   canvasCtx.strokeStyle = 'rgb(0, 0, 0)';
 
-  const sliceWidth = WIDTH * 1.0 / bufferLength;
+  const sliceWidth = 200 * 1.0 / bufferLength;
   let x = 0;
 
   canvasCtx.beginPath();
@@ -60,7 +60,7 @@ const drawWave = () => {
     x += sliceWidth;
   }
 
-  canvasCtx.lineTo(WIDTH, HEIGHT/2);
+  canvasCtx.lineTo(200, 200/2);
   canvasCtx.stroke();
 
   console.log("---")
