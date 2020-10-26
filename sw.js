@@ -18,6 +18,21 @@ const failoverResources = [
     ['.html','faiover.html']
 ]
 
+const clearCaches = (event) => {
+    caches.keys().then( cacheNameKeys =>{
+        console.log("SW cacheNameKeys", cacheNameKeys)
+        return Promise.all(
+            cacheNameKeys.map(cacheName => {
+                console.log("SW cacheName", cacheName)
+                console.log("SW includes?", cacheNames.indexOf(cacheName))
+                if(cacheNames.indexOf(cacheName) === -1 ) {
+                    return caches.delete(cacheName);
+                }
+            })
+        )
+    })
+}
+
 self.addEventListener('install', (e)=>{
     console.log("SW installed")
 
@@ -55,18 +70,7 @@ self.addEventListener('activate', e =>{
 self.addEventListener('fetch', (e)=>{
     console.log("SW fetching...")
 
-    caches.keys().then( cacheNameKeys =>{
-        console.log("SW cacheNameKeys", cacheNameKeys)
-        return Promise.all(
-            cacheNameKeys.map(cacheName => {
-                console.log("SW cacheName", cacheName)
-                console.log("SW includes?", cacheNames.indexOf(cacheName))
-                if(cacheNames.indexOf(cacheName) === -1 ) {
-                    return caches.delete(cacheName);
-                }
-            })
-        )
-    })
+    clearCaches(e);
 
     e.respondWith(
         fetch(e.request)
