@@ -49,5 +49,5 @@ const renderAudio = () => {
 renderAudio(); // kick the whole thing off
 
 setInterval(() => {
-  renderKey(pitchSamples); // defined elsewhere, will get the average pitch and render a key
+  console.log(pitchSamples); // defined elsewhere, will get the average pitch and render a key
 }, 250);
