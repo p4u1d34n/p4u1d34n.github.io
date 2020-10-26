@@ -17,7 +17,8 @@ var canvas = document.getElementById('canvas');
 const canvasCtx = canvas.getContext('2d');
 canvasCtx.fillStyle = 'firebrick';
 
-const drawWave = () => { // this gets called via requestAnimationFrame, so runs roughly every 16ms
+const drawWave = () => { 
+  // this gets called via requestAnimationFrame, so runs roughly every 16ms
   /* analyser.getByteTimeDomainData(dataArray);
 
   let lastPos = 0;
@@ -66,11 +67,8 @@ const drawWave = () => { // this gets called via requestAnimationFrame, so runs 
 
 const renderAudio = () => {
   requestAnimationFrame(renderAudio);
-
   if (!audioReady) return;
-
   canvasCtx.clearRect(0, 0, 1024, 300);
-
   drawWave();
 };
 
