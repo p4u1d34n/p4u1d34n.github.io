@@ -1,7 +1,7 @@
 // SW INIT BEGIN
 if('serviceWorker' in navigator) {
     console.log("SW supported");
-    window.addEventListener('load',()=>{
+    window.addEventListener('load',function(){
         navigator.serviceWorker.register('sw_cache_pages.js').then( reg => {
             console.log("SW Registered")
         }).catch(e => {
