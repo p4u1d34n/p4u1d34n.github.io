@@ -69,7 +69,7 @@ const drawWave = () => {
 
 const renderAudio = () => {
   requestAnimationFrame(renderAudio);
-  if (!audioReady) return;
+  //if (!audioReady) return;
   canvasCtx.clearRect(0, 0, 1024, 300);
   drawWave();
 };
