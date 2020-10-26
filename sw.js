@@ -21,10 +21,7 @@ const failoverResources = [
 self.addEventListener('install', (e)=>{
     console.log("SW installed")
 
-    failoverResources.forEach((key) => {
-        console.log(key[0]);
-        console.log(key[1]);
-    });
+    
 
     e.waitUntil(
         caches.open(staticCacheName).then(static =>{
@@ -45,4 +42,10 @@ self.addEventListener('activate', (e)=>{
 
 self.addEventListener('fetch', (e)=>{
     console.log("SW fetch")
+
+    failoverResources.forEach((key) => {
+        console.log(key[0]);
+        console.log(key[1]);
+    });
+    
 })
