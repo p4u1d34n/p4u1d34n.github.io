@@ -1,4 +1,4 @@
-const audioContext = new window.AudioContext();
+const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 const analyser = audioContext.createAnalyser();
 const pitchSamples = [];
 let audioReady = false;
