@@ -63,6 +63,8 @@ const drawWave = () => {
   canvasCtx.lineTo(WIDTH, HEIGHT/2);
   canvasCtx.stroke();
 
+  console.log("---")
+
 };
 
 const renderAudio = () => {
