@@ -34,7 +34,7 @@ self.addEventListener('install', (e)=>{
     )
 })
 
-self.addEventListener('activate', (e)=>{
+self.addEventListener('activate', e =>{
     console.log("SW activated")
     e.waitUntil(
         caches.keys().then( cacheNameKeys =>{
