@@ -44,7 +44,14 @@ self.addEventListener('activate', e =>{
                     console.log("SW cacheName", cacheName)
                     console.log("SW includes?", cacheNames.indexOf(cacheName))
                     if(cacheNames.indexOf(cacheName) == -1 ) {
-                        return caches.delete(cacheName)
+                        caches.delete(cacheName).then( v => {
+                            console.error("Value", v)
+                            return true;
+                        }).catch(e => {
+                            console.error("ERROR", e)
+                            return false;
+                        })
+                        
                     }
                 })
             )
