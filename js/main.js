@@ -1,6 +1,5 @@
 // SW INIT BEGIN
 if ('serviceWorker' in navigator) {
-    console.log("SW supported");
     // Register a service worker hosted at the root of the
     navigator.serviceWorker.register('../sw.js').then(function (registration) {
         console.log('Service worker registration succeeded:', registration);

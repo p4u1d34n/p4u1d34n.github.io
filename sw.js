@@ -1,4 +1,4 @@
-const staticCacheName = 'static-v2';
+const staticCacheName = 'static-v1';
 const dynamicCacheName = 'dynamic-v1';
 
 const cacheNames = [
@@ -9,7 +9,8 @@ const cacheNames = [
 const staticAssets = [
     'index.html',
     '/css/styles.css',
-    '/js/main.js'
+    '/js/main.js',
+    
 ];
 
 const failoverResources = [
@@ -18,27 +19,13 @@ const failoverResources = [
     ['.html', 'faiover.html']
 ]
 
-const clearCaches = (event) => {
-    caches.keys().then(cacheNameKeys => {
-        console.log("SW cacheNameKeys", cacheNameKeys)
-        return Promise.all(
-            cacheNameKeys.map(cacheName => {
-                console.log("SW cacheName", cacheName)
-                console.log("SW includes?", cacheNames.indexOf(cacheName))
-                if (cacheNames.indexOf(cacheName) === -1) {
-                    return caches.delete(cacheName);
-                }
-            })
-        )
-    })
-}
-
 self.addEventListener('install', (e) => {
     console.log("SW installed")
 
     e.waitUntil(
         caches.open(staticCacheName).then(static => {
             failoverResources.forEach((key) => {
+                console.log('key[1] = ', key[1]);
                 staticAssets.push(key[1]);
             });
             console.log('staticAssets', staticAssets);
@@ -50,7 +37,6 @@ self.addEventListener('install', (e) => {
 })
 
 self.addEventListener('activate', e => {
-    console.log("SW activated")
     e.waitUntil(
         caches.keys().then(cacheNameKeys => {
             console.log("SW cacheNameKeys", cacheNameKeys)
@@ -68,9 +54,22 @@ self.addEventListener('activate', e => {
 })
 
 self.addEventListener('fetch', (e) => {
-    console.log("SW fetching...",e.request)
+    console.log("SW fetching...", e.request.url )
 
-    clearCaches(e);
+    e.waitUntil(
+        caches.keys().then(cacheNameKeys => {
+            console.log("SW cacheNameKeys", cacheNameKeys)
+            return Promise.all(
+                cacheNameKeys.map(cacheName => {
+                    console.log("SW cacheName", cacheName)
+                    console.log("SW includes?", cacheNames.indexOf(cacheName))
+                    if (cacheNames.indexOf(cacheName) === -1) {
+                        return caches.delete(cacheName);
+                    }
+                })
+            )
+        })
+    )
 
     e.respondWith(
         fetch(e.request)
