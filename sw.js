@@ -13,8 +13,8 @@ const staticAssets = [
 ];
 
 const failoverResources = [
-    ['.png','https://dummyimage.com/300/09f/fff.png&text=Placeholder'],
-    ['.jpg','https://dummyimage.com/300/09f/fff.jpg&text=Placeholder'],
+    ['.png','/static/images/placeholder.png'],
+    ['.jpg','/static/images/placeholder.jpg'],
     ['.html','faiover.html']
 ]
 
@@ -26,7 +26,7 @@ self.addEventListener('install', (e)=>{
             failoverResources.forEach((key) => {
                 staticAssets.push(key[1]);
             });
-            console.log('staticAssets',staticAssets)
+            console.log('staticAssets',staticAssets);
             static.addAll(staticAssets);
         }).then(()=>{
             self.skipWaiting();
@@ -36,6 +36,17 @@ self.addEventListener('install', (e)=>{
 
 self.addEventListener('activate', (e)=>{
     console.log("SW activated")
+    e.waitUntil(
+        caches.keys().then((cachnames)=>{
+            return Promise.all(
+                cacheNames.map(cache => {
+                    if(!cacheNames.includes(cache)) {
+                        return caches.delete(cache)
+                    }
+                })
+            )
+        })
+    )
 })
 
 self.addEventListener('fetch', (e)=>{
