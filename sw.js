@@ -1,4 +1,4 @@
-const staticCacheName = 'static-v2';
+const staticCacheName = 'static-v1';
 const dynamicCacheName = 'dynamic-v1';
 
 const cacheNames = [
