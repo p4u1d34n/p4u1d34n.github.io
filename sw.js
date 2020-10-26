@@ -10,25 +10,16 @@ const staticAssets = [
     'index.html',
     '/css/styles.css',
     '/js/main.js',
-    
+    'faiover.html'
 ];
 
-const failoverResources = [
-    ['.png', '/static/images/placeholder.png'],
-    ['.jpg', '/static/images/placeholder.jpg'],
-    ['.html', 'faiover.html']
-]
+
 
 self.addEventListener('install', (e) => {
     console.log("SW installed")
 
     e.waitUntil(
         caches.open(staticCacheName).then(static => {
-            failoverResources.forEach((key) => {
-                console.log('key[1] = ', key[1]);
-                staticAssets.push(key[1]);
-            });
-            console.log('staticAssets', staticAssets);
             static.addAll(staticAssets);
         }).then(() => {
             self.skipWaiting();
