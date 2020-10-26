@@ -37,7 +37,7 @@ self.addEventListener('install', (e)=>{
 self.addEventListener('activate', (e)=>{
     console.log("SW activated")
     e.waitUntil(
-        caches.keys().then((cachnames)=>{
+        caches.keys().then((cachNames)=>{
             return Promise.all(
                 cacheNames.map(cache => {
                     if(!cacheNames.includes(cache)) {
