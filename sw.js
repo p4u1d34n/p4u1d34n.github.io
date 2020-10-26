@@ -57,24 +57,24 @@ self.addEventListener('fetch', (e)=>{
 
     e.respondWith(
         fetch(e.request)
-        .then(e => {
+        .catch(() => {
 
-        })
-        .catch(e => {
-            failoverResources.forEach(failover => {
+            caches.match(e.request)
+
+            /* failoverResources.forEach(failover => {
                 if( e.request.indexOf(failover[0]) === -1 ) {
                     caches.match(e.request)
                 } else {
                     caches.match(failover[1])
                 }
-            })
+            }) */
             
         })
     )
 
-    failoverResources.forEach((key) => {
+   /*  failoverResources.forEach((key) => {
         console.log(key[0]);
         console.log(key[1]);
-    });
+    }); */
 
 })
