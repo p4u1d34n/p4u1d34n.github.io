@@ -14,7 +14,6 @@ navigator.mediaDevices.getUserMedia(
 
 analyser.fftSize = 2048;
 const bufferLength = analyser.fftSize;
-const dataArray = new Uint8Array(bufferLength);
 
 const dataArray = new Uint8Array(analyser.frequencyBinCount);
 var canvas = document.getElementById('canvas');
